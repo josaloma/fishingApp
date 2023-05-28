@@ -1,7 +1,7 @@
 Käytetty aika
 
 Päivä (dd.mm.yy)    aika (h)        Selitys
-xx.xx.2023          xh              xxx
+28.05.2023          xh              Projektin perustus ja rakenteen luonti 
 xx.xx.2023          xh + xh         xx
 xx.xx.2023          xh              xx
 xx.xx.2023          xh              xx
