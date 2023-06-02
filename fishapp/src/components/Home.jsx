@@ -1,7 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-const Home = () => {
+const Home = ({navigation}) => {
+    //console.log(navigation)
     return (
         <View style={styles.flexContainer}>
             <View style={styles.flexItem}>

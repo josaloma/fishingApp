@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-const AddFish = () => {
+const AddFish = ({navigation}) => {
     return (
         <View style={styles.flexContainer}>
             <View style={styles.flexItem}>
