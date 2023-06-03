@@ -1,56 +1,34 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+import useFishList from '../hooks/useFishList.js';
+
+import OneFish from './OneFish';
+
+const ItemSeparator = () => <View style={styles.separator} />;
+
+const renderItem = ({item})=> {
+    return (
+        <OneFish fullName={item.fullName} weight={item.weight} length={item.length}/>
+    );
+}
 
 const Home = ({navigation}) => {
-    //console.log(navigation)
+    const fishList = useFishList();
+    console.log(fishList)
     return (
-        <View style={styles.flexContainer}>
-            <View style={styles.flexItem}>
-                <Text style={styles.text}>Home flexitem 1</Text>
-            </View>
-            <View style={styles.flexItem}>
-                <Text style={styles.text}>Home flexitem 2</Text>
-            </View>
-            <View style={styles.flexItem}>
-                <TouchableOpacity style={styles.opacity} onPress={() => console.log("Homessa Nappi painettu")}>  
-                    <Text style={styles.text}>Nappi</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        <FlatList
+        data={fishList}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        />
     );
 };
 
-    const styles = StyleSheet.create({
-      text: {
-          color: 'black', 
-          fontSize: 24, 
-          fontWeight: '700',
-          textAlign: 'center',
-      },
-      flexContainer: {
-          flexGrow: 1,
-          display: 'flex',
-          flexDirection: 'column',
-        },
-        flexItem: {
-          flexGrow: 1,
-          backgroundColor: 'white',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        opacity: {
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '100%',
-      },
-      textButton: {
-        color: 'white', 
-        fontSize: 24, 
-        fontWeight: '700',
-        backgroundColor: '#0366d6', // blue
-        padding: 10,
-        borderRadius: 10,
+const styles = StyleSheet.create({
+    separator: {
+        height: 10,
     },
-  });
-    export default Home;
+});
+
+export default Home;
