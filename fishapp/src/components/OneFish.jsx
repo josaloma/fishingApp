@@ -28,17 +28,17 @@ const styles = StyleSheet.create({
         color: 'black', 
         fontSize: 24, 
         fontWeight: '700',
-        textAlign: 'center',
+        textAlign: 'left', // 'center'
     },
     flexContainer: {
         flexGrow: 1,
         display: 'flex',
-        flexDirection: 'row', //, StyleSheet 
+        flexDirection: 'column', // 'row'
       },
       flexItem: {
         flexGrow: 1,
         backgroundColor: 'white',
-        alignItems: 'center',
+        alignItems: 'left',
         justifyContent: 'center',
       },
 });

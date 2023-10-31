@@ -11,7 +11,7 @@ const AddFish = ({navigation}) => {
                 <Text style={styles.text}>AddFish flexitem 2</Text>
             </View>
             <View style={styles.flexItem}>
-                <TouchableOpacity style={styles.opacity} onPress={() => console.log("AddFish Nappi painettu")}>  
+                <TouchableOpacity style={styles.opacity} onPress={() => console.log("Settings Nappi painettu")}>  
                     <Text style={styles.text}>Nappi</Text>
                 </TouchableOpacity>
             </View>
