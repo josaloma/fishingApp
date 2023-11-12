@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fishapp",
-    "slug": "fishapp",
+    "name": "fishApp",
+    "slug": "fishApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
