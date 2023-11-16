@@ -1,34 +1,32 @@
-import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import useFishList from '../hooks/useFishList.js';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import OneFish from './OneFish';
+import FishList from './FishList';
+import FishDetails from './FishDetails';
 
-const ItemSeparator = () => <View style={styles.separator} />;
-
-const renderItem = ({item})=> {
-    return (
-        <OneFish fullName={item.fullName} weight={item.weight} length={item.length}/>
-    );
-}
+const SubTab = createNativeStackNavigator();
 
 const Home = ({navigation}) => {
-    const fishList = useFishList();
-    console.log(fishList)
     return (
-        <FlatList
-        data={fishList}
-        ItemSeparatorComponent={ItemSeparator}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        />
-    );
+        <SubTab.Navigator initialRouteName={"FishList"}
+        screenOptions={{
+            headerShown: false
+          }}>
+          <SubTab.Screen name="FishList" component={FishList} />
+          <SubTab.Screen name="FishDetails" component={FishDetails} />
+        </SubTab.Navigator>
+      );
 };
 
-const styles = StyleSheet.create({
-    separator: {
-        height: 10,
-    },
-});
-
 export default Home;
+
+/*return (
+    <SubTab.Navigator>
+      <SubTab.Screen name="FishList" component={FishList} />
+      <SubTab.Screen name="Testi" component={Testi} />
+    </SubTab.Navigator>
+  );*/
+
+/*    return (
+        <FishList/>
+      );*/

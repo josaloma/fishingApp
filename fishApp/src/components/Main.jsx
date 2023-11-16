@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 const Main = () => {
     //tabBar={props => <TabBar {...props} />} 
   return (
-    <Tab.Navigator initialRouteName={"home"} 
+    <Tab.Navigator initialRouteName={"Home"} 
     screenOptions= {{
         headerStyle: { backgroundColor: '#24292e' },
         headerTintColor: '#fa8072',

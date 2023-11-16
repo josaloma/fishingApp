@@ -1,5 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+//navigation.navigate("Testi")}>
+//console.log("Settingissä Nappi painettu")}>  
 
 const Settings = ({navigation}) => {
     return (

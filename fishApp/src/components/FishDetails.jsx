@@ -1,18 +1,27 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-const AddFish = ({navigation}) => {
+const FishDetails = ({item, navigation}) => {
+
+    const onSubmit = async () => {
+        console.log("alue painettu takaisin Fishlistiin ", route.params.item.id);
+        navigation.navigate("FishList");
+    }
+
     return (
         <View style={styles.flexContainer}>
             <View style={styles.flexItem}>
-                <Text style={styles.text}>AddFish flexitem 1</Text>
+                <Text style={styles.text}>{item.fullName}</Text>
+            </View> 
+            <View style={styles.flexItem}>
+                <Text style={styles.text}>{item.weight}</Text>
+            </View>
+            <View  style={styles.flexItem}>
+                <Text style={styles.text}>{item.length}</Text>
             </View>
             <View style={styles.flexItem}>
-                <Text style={styles.text}>AddFish flexitem 2</Text>
-            </View>
-            <View style={styles.flexItem}>
-                <TouchableOpacity style={styles.opacity} onPress={() => console.log("AddFish Nappi painettu")}>  
-                    <Text style={styles.text}>Nappi</Text>
+                <TouchableOpacity style={styles.opacity} onPress={onSubmit}>  
+                    <Text style={styles.text}>Takaisin</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -52,4 +61,4 @@ const AddFish = ({navigation}) => {
         borderRadius: 10,
     },
   });
-    export default AddFish;
+    export default FishDetails;

@@ -1,22 +1,23 @@
 import { View,  Text, Pressable, StyleSheet  } from 'react-native';
 
-const OneFish = ({ fullName, weight, length }) => {
+const OneFish = ({ item, navigation }) => {
 
     const onSubmit = async () => {
-        console.log("alue painettu");
+        console.log("alue painettu siirtyykö Fishdetailisiin?");
+        navigation.navigate("FishDetails",{item: item});
     }
  
     return (
         <Pressable onPress={onSubmit}>
             <View style={styles.flexContainer}>
                 <View style={styles.flexItem}>
-                    <Text style={styles.text}>{fullName}</Text>
+                    <Text style={styles.text}>{item.fullName}</Text>
                 </View> 
                 <View style={styles.flexItem}>
-                    <Text style={styles.text}>{weight}</Text>
+                    <Text style={styles.text}>{item.weight}</Text>
                 </View>
                 <View  style={styles.flexItem}>
-                    <Text style={styles.text}>{length}</Text>
+                    <Text style={styles.text}>{item.length}</Text>
                 </View>
             </View>
         </Pressable> 
