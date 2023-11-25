@@ -1,10 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-const FishDetails = ({item, navigation}) => {
+const FishDetails = ({route, navigation}) => {
 
+    //console.log("FishDetails item:", route.params.item);
+    const { item } = route.params;
     const onSubmit = async () => {
-        console.log("alue painettu takaisin Fishlistiin ", route.params.item.id);
+        console.log("alue painettu takaisin Fishlistiin ");
         navigation.navigate("FishList");
     }
 
@@ -62,3 +64,5 @@ const FishDetails = ({item, navigation}) => {
     },
   });
     export default FishDetails;
+    /* 
+            */

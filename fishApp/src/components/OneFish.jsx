@@ -2,9 +2,12 @@ import { View,  Text, Pressable, StyleSheet  } from 'react-native';
 
 const OneFish = ({ item, navigation }) => {
 
+    //console.log("One Fish item:", item);
+
     const onSubmit = async () => {
         console.log("alue painettu siirtyykö Fishdetailisiin?");
-        navigation.navigate("FishDetails",{item: item});
+        console.log("oneFish item:", item);
+        navigation.navigate("FishDetails",{item: item,});
     }
  
     return (

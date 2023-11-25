@@ -10,8 +10,8 @@ const renderItem = ({item, navigation})=> {
     return (
         <OneFish fullName={item.fullName} weight={item.weight} length={item.length} navigation={navigation}/>
     );
-}*/
-
+};
+*/
 const FishList = ({navigation}) => {
     const fishList = useFishList();
     console.log(fishList)
@@ -34,3 +34,4 @@ const styles = StyleSheet.create({
 export default FishList;
 
 //        renderItem={renderItem(item, navigation)}
+//renderItem={({ item }) => <OneFish item={item} navigation={navigation}/>}
