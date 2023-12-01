@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
 
 //navigation.navigate("Testi")}>
 //console.log("Settingissä Nappi painettu")}>  
@@ -13,9 +13,9 @@ const Settings = ({navigation}) => {
                 <Text style={styles.text}>Settings flexitem 2</Text>
             </View>
             <View style={styles.flexItem}>
-                <TouchableOpacity style={styles.opacity} onPress={() => console.log("Settingissä Nappi painettu")}>  
+                <Pressable style={styles.opacity} onPress={() => console.log("Settingissä Nappi painettu")}>  
                     <Text style={styles.text}>Nappi</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </View>
     );

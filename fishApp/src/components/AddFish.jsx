@@ -1,7 +1,48 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
 
+import useFishStorage from '../hooks/useFishStorage';
 
 const AddFish = ({navigation}) => {
+
+    const fishStorage = useFishStorage();
+
+    const kala = {
+        id: Date.now(),
+        fullName: 'Kuha',
+        weight: 5.2,
+        length: 73,
+        picture: 'gallery,...',
+    };
+
+    const onSubmit1 = async () => {
+        const kala = {
+            id: Date.now(),
+            fullName: 'Kuha',
+            weight: 5.2,
+            length: 73,
+            picture: 'gallery,...',
+        };
+        console.log("nappi1 painettu");
+        console.log("Kala: ", kala);
+        const fishList1 = await fishStorage.getFishList();
+        console.log("Lista ennen lisäystä", fishList1);
+        await fishStorage.addFish(kala);
+        const fishList2 = await fishStorage.getFishList();
+        console.log("Lista lisäyksen jälkeen", fishList2);
+    }
+
+    const onSubmit2 = async () => {
+        console.log("nappi2 painettu");
+        const fishList1 = await fishStorage.getFishList();
+        console.log("Lista ennen poistoa", fishList1);
+        await fishStorage.removeFishList();
+        const fishList2 = await fishStorage.getFishList();
+        console.log("Lista poiston jälkeen", fishList2);
+    }
+    
+
+
+
     return (
         <View style={styles.flexContainer}>
             <View style={styles.flexItem}>
@@ -11,9 +52,14 @@ const AddFish = ({navigation}) => {
                 <Text style={styles.text}>AddFish flexitem 2</Text>
             </View>
             <View style={styles.flexItem}>
-                <TouchableOpacity style={styles.opacity} onPress={() => console.log("AddFish Nappi painettu")}>  
-                    <Text style={styles.text}>Nappi</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.opacity} onPress={onSubmit1}>  
+                    <Text style={styles.text}>Nappi lisää</Text>
+                </Pressable>
+            </View>
+            <View style={styles.flexItem}>
+                <Pressable style={styles.opacity} onPress={onSubmit2}>  
+                    <Text style={styles.text}>Nappi poista</Text>
+                </Pressable>
             </View>
         </View>
     );

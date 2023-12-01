@@ -2,13 +2,12 @@ Käytetty aika
 
 Päivä (dd.mm.yy)    aika (h)        Selitys
 28.05.2023          3h              Projektin perustus ja rakenteen luonti 
-2.6.2023            2h              Bottom tab bar aloitus
-3.6.2023            2h              Flatlist home näyttöön
+02.06.2023            2h              Bottom tab bar aloitus
+03.06.2023            2h              Flatlist home näyttöön
 16.11.2023          2h              Alinavigainti Home näyttöön 
 25.11.2023          5h              asyncstorage ja context yritys joka hajoitti koko projektin
-
 25.11.2023          1h              Perussovellutoimintaan
-(FishList ja FishDetails näkymä)
-xx.xx.2023          xh              xx
+27.11.2023          2h              asyncstorage ja context backend aloitus
+01.12.2023          2h              Fixing render isssues between stack navigator and useeffect
 xx.xx.2023          xh              xx
 xx.xx.2023          xh              xx
