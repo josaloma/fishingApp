@@ -1,101 +1,118 @@
-import { View, Text, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
+import React from 'react'
 
-import useFishStorage from '../hooks/useFishStorage';
+
+//import useFishStorage from '../hooks/useFishStorage';
+
+import { Formik, useField } from 'formik';
+
+const initialValues = {
+  id: '',
+  fullName: '',
+  weight: '',
+  length: '',
+  picture: '',
+};
+
+const AddFishForm = ({ onSubmit }) => {
+
+  const [speciesField, speciesMeta, speciesHelpers] = useField('species');
+  const [massField, massMeta, massHelpers] = useField('mass');
+  const [heightField, heightMeta, heightHelpers] = useField('height');
+
+  return (
+    <View>
+      <TextInput
+        style={styles.textInput}
+        placeholder="e.g. Trout"
+        value={speciesField.value}
+        onChangeText={text => speciesHelpers.setValue(text)}
+      />
+      <TextInput
+        style={styles.textInput}
+        placeholder="Weight (kg)"
+        value={massField.value}
+        onChangeText={text => massHelpers.setValue(text)}
+      />
+      <TextInput
+        style={styles.textInput}
+        placeholder="Height (m)"
+        value={heightField.value}
+        onChangeText={text => heightHelpers.setValue(text)}
+      />
+      <Pressable style={({pressed}) => [{
+        backgroundColor: pressed ? 'gray' : 'white',
+        }, styles.pressable ]}
+        onPress={onSubmit}>
+        <Text style={styles.text}>Add Fish</Text>
+      </Pressable>
+    </View>
+  );
+};
 
 const AddFish = ({navigation}) => {
 
-    const fishStorage = useFishStorage();
+  //const fishStorage = useFishStorage();
 
-    const kala = {
-        id: Date.now(),
-        fullName: 'Kuha',
-        weight: 5.2,
-        length: 73,
-        picture: 'gallery,...',
-    };
-
-    const onSubmit1 = async () => {
-        const kala = {
-            id: Date.now(),
-            fullName: 'Kuha',
-            weight: 5.2,
-            length: 73,
-            picture: 'gallery,...',
-        };
-        console.log("nappi1 painettu");
-        console.log("Kala: ", kala);
-        const fishList1 = await fishStorage.getFishList();
+  const onSubmit = (values) => {
+    //const mass = parseFloat(values.mass);
+    //const height = parseFloat(values.height);
+    console.log("nappi addFish painettu");
+    console.log("Kala: ", values);
+        /*const fishList1 = await fishStorage.getFishList();
         console.log("Lista ennen lisäystä", fishList1);
         await fishStorage.addFish(kala);
         const fishList2 = await fishStorage.getFishList();
-        console.log("Lista lisäyksen jälkeen", fishList2);
-    }
+        console.log("Lista lisäyksen jälkeen", fishList2);*/
+  };
 
-    const onSubmit2 = async () => {
-        console.log("nappi2 painettu");
-        const fishList1 = await fishStorage.getFishList();
-        console.log("Lista ennen poistoa", fishList1);
-        await fishStorage.removeFishList();
-        const fishList2 = await fishStorage.getFishList();
-        console.log("Lista poiston jälkeen", fishList2);
-    }
+
+  return (
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ handleSubmit }) => <AddFishForm onSubmit={handleSubmit} />}
+      </Formik>
     
 
-
-
-    return (
-        <View style={styles.flexContainer}>
-            <View style={styles.flexItem}>
-                <Text style={styles.text}>AddFish flexitem 1</Text>
-            </View>
-            <View style={styles.flexItem}>
-                <Text style={styles.text}>AddFish flexitem 2</Text>
-            </View>
-            <View style={styles.flexItem}>
-                <Pressable style={styles.opacity} onPress={onSubmit1}>  
-                    <Text style={styles.text}>Nappi lisää</Text>
-                </Pressable>
-            </View>
-            <View style={styles.flexItem}>
-                <Pressable style={styles.opacity} onPress={onSubmit2}>  
-                    <Text style={styles.text}>Nappi poista</Text>
-                </Pressable>
-            </View>
-        </View>
     );
-};
+};  
+/*   <View style={styles.flexContainer}>
+      <View style={styles.flexItem}>
+        <Text style={styles.text}>Nappi poista</Text>
+      </View>
 
-    const styles = StyleSheet.create({
-      text: {
-          color: 'black', 
-          fontSize: 24, 
-          fontWeight: '700',
-          textAlign: 'center',
-      },
-      flexContainer: {
-          flexGrow: 1,
-          display: 'flex',
-          flexDirection: 'column',
-        },
-        flexItem: {
-          flexGrow: 1,
-          backgroundColor: 'white',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        opacity: {
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '100%',
-      },
-      textButton: {
-        color: 'white', 
-        fontSize: 24, 
-        fontWeight: '700',
-        backgroundColor: '#0366d6', // blue
-        padding: 10,
-        borderRadius: 10,
-    },
-  });
-    export default AddFish;
+    </View>  
+      
+*/
+const styles = StyleSheet.create({
+  text: {
+    color: 'black', 
+    fontSize: 24, 
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  pressable: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+        //height: '50%',
+        //backgroundColor: 'white', // blue
+  },
+  loginContainer: {
+    width: '80%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 10,
+    elevation: 10,
+    backgroundColor: '#e6e6e6'
+  },
+  textInput: {
+    height: 40,
+    width: '100%',
+    margin: 10,
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+})
+export default AddFish;

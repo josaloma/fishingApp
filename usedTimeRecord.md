@@ -8,6 +8,7 @@ Päivä (dd.mm.yy)    aika (h)        Selitys
 25.11.2023          5h              asyncstorage ja context yritys joka hajoitti koko projektin
 25.11.2023          1h              Perussovellutoimintaan
 27.11.2023          2h              asyncstorage ja context backend aloitus
-01.12.2023          2h              Fixing render isssues between stack navigator and useeffect
+01.12.2023          2h              Fixing render isssues between stacknavigator and useeffect 
+02.12.2023          3h              Add Fish sivun Formik implementointi
 xx.xx.2023          xh              xx
 xx.xx.2023          xh              xx

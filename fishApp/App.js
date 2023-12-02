@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Main from './src/components/Main';
 import FishStorage from './src/utils/fishStorage';
-import FishStorageContext from './src/contexts/fishStorageContext';
+import FishStorageContext from './src/contexts/FishStorageContext';
 
 const fishStorage = new FishStorage();
 

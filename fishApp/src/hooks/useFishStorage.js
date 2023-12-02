@@ -1,6 +1,6 @@
 //import { createContext } from 'react';
 import { useContext } from 'react'; 
-import FishStorageContext from '../contexts/fishStorageContext';
+import FishStorageContext from '../contexts/FishStorageContext';
 
 const useFishStorage = () => {
 
