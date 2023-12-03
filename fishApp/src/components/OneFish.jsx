@@ -19,7 +19,7 @@ const OneFish = ({ item, navigation }) => {
         <Pressable onPress={onSubmit}>
             <View style={styles.flexContainer}>
                 <View style={styles.flexItem}>
-                    <Text style={styles.text}>{item.fullName}</Text>
+                    <Text style={styles.text}>{item.species}</Text>
                 </View> 
                 <View style={styles.flexItem}>
                     <Text style={styles.text}>{item.weight}</Text>

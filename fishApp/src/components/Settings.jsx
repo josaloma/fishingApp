@@ -11,7 +11,7 @@ const Settings = ({navigation}) => {
     const onSubmit1 = async () => {
         const kala = {
             id: Date.now(),
-            fullName: 'Kuha',
+            species: 'Kuha',
             weight: 5.2,
             length: 73,
             picture: 'gallery,...',

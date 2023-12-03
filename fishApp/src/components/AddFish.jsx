@@ -2,23 +2,34 @@ import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
 import React from 'react'
 
 
-//import useFishStorage from '../hooks/useFishStorage';
+import useFishStorage from '../hooks/useFishStorage';
 
 import { Formik, useField } from 'formik';
 
+import * as yup from 'yup';
+
 const initialValues = {
   id: '',
-  fullName: '',
+  species: '',
   weight: '',
   length: '',
   picture: '',
 };
 
+const validationSchema = yup.object().shape({
+  species: yup
+     .string().required(),
+   weight: yup
+   .number().required(),
+     length: yup
+     .number().required(),
+ });
+
 const AddFishForm = ({ onSubmit }) => {
 
   const [speciesField, speciesMeta, speciesHelpers] = useField('species');
-  const [massField, massMeta, massHelpers] = useField('mass');
-  const [heightField, heightMeta, heightHelpers] = useField('height');
+  const [weightField, weightMeta, weightHelpers] = useField('weight');
+  const [lengthField, lengthMeta, lengthHelpers] = useField('length');
 
   return (
     <View>
@@ -31,14 +42,14 @@ const AddFishForm = ({ onSubmit }) => {
       <TextInput
         style={styles.textInput}
         placeholder="Weight (kg)"
-        value={massField.value}
-        onChangeText={text => massHelpers.setValue(text)}
+        value={weightField.value}
+        onChangeText={text => weightHelpers.setValue(text)}
       />
       <TextInput
         style={styles.textInput}
-        placeholder="Height (m)"
-        value={heightField.value}
-        onChangeText={text => heightHelpers.setValue(text)}
+        placeholder="length (cm)"
+        value={lengthField.value}
+        onChangeText={text => lengthHelpers.setValue(text)}
       />
       <Pressable style={({pressed}) => [{
         backgroundColor: pressed ? 'gray' : 'white',
@@ -52,25 +63,34 @@ const AddFishForm = ({ onSubmit }) => {
 
 const AddFish = ({navigation}) => {
 
-  //const fishStorage = useFishStorage();
+  const fishStorage = useFishStorage();
 
-  const onSubmit = (values) => {
-    //const mass = parseFloat(values.mass);
-    //const height = parseFloat(values.height);
+  const onSubmit = async ( values ) => {
+    const kala = {
+      id: Date.now(),
+      species: values.species,
+      weight: parseFloat(values.weight),
+      length: parseFloat(values.length),
+      picture: 'Galleria WOW',
+    };
+    //const species = values.species
+    //const weight = parseFloat(values.weight);
+    //const length = parseFloat(values.length);
     console.log("nappi addFish painettu");
-    console.log("Kala: ", values);
-        /*const fishList1 = await fishStorage.getFishList();
+    console.log("Kala: ", kala);
+        const fishList1 = await fishStorage.getFishList();
         console.log("Lista ennen lisäystä", fishList1);
         await fishStorage.addFish(kala);
         const fishList2 = await fishStorage.getFishList();
-        console.log("Lista lisäyksen jälkeen", fishList2);*/
+        console.log("Lista lisäyksen jälkeen", fishList2);
   };
 
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ handleSubmit }) => <AddFishForm onSubmit={handleSubmit} />}
-      </Formik>
+    <Formik initialValues={initialValues}  validationSchema={validationSchema} 
+      onSubmit={(values , {resetForm} ) => { onSubmit(values); resetForm({ values: ''});}}>
+      {({ handleSubmit }) => <AddFishForm onSubmit={handleSubmit} />}
+    </Formik>
     
 
     );
