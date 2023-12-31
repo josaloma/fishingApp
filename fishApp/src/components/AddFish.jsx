@@ -18,7 +18,9 @@ const initialValues = {
 
 const validationSchema = yup.object().shape({
   species: yup
-     .string().required(),
+     .string()
+     .required()
+     .typeError('you must specify a number'),
    weight: yup
    .number().required(),
      length: yup
