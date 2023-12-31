@@ -11,7 +11,7 @@ Päivä (dd.mm.yy)    aika (h)        Selitys
 01.12.2023          2h              Fixing render isssues between stacknavigator and useeffect 
 02.12.2023          3h              Add Fish sivun Formik implementointi
 03.12.2023          2h              Formik tuning Yup and reset after send
-xx.xx.2023          xh              xx
+31.12.2023          1h              Formik tuning continues
 xx.xx.2023          xh              xx
 xx.xx.2023          xh              xx
 xx.xx.2023          xh              xx

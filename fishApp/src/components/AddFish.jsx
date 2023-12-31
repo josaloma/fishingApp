@@ -19,12 +19,15 @@ const initialValues = {
 const validationSchema = yup.object().shape({
   species: yup
      .string()
-     .required()
-     .typeError('you must specify a number'),
+     .required(),
    weight: yup
-   .number().required(),
+   .number()
+   .required()
+   .typeError("you must specify a number"),
      length: yup
-     .number().required(),
+     .number()
+     .required()
+     .typeError("you must specify a number"),
  });
 
 const AddFishForm = ({ onSubmit }) => {
@@ -32,6 +35,9 @@ const AddFishForm = ({ onSubmit }) => {
   const [speciesField, speciesMeta, speciesHelpers] = useField('species');
   const [weightField, weightMeta, weightHelpers] = useField('weight');
   const [lengthField, lengthMeta, lengthHelpers] = useField('length');
+  const showSpeciesError = speciesMeta.touched && speciesMeta.error;
+  const showWeightError = weightMeta.touched && weightMeta.error;
+  const showLengthError = lengthMeta.touched && lengthMeta.error;
 
   return (
     <View>
@@ -40,19 +46,25 @@ const AddFishForm = ({ onSubmit }) => {
         placeholder="e.g. Trout"
         value={speciesField.value}
         onChangeText={text => speciesHelpers.setValue(text)}
+        onBlur={() => speciesHelpers.setTouched(true)}
       />
+      {showSpeciesError && <Text style={styles.errorText}>{speciesMeta.error}</Text>}
       <TextInput
         style={styles.textInput}
         placeholder="Weight (kg)"
         value={weightField.value}
         onChangeText={text => weightHelpers.setValue(text)}
+        onBlur={() => weightHelpers.setTouched(true)}
       />
+      {showWeightError && <Text style={styles.errorText}>{weightMeta.error}</Text>}
       <TextInput
         style={styles.textInput}
         placeholder="length (cm)"
         value={lengthField.value}
         onChangeText={text => lengthHelpers.setValue(text)}
+        onBlur={() => lengthHelpers.setTouched(true)}
       />
+      {showLengthError && <Text style={styles.errorText}>{lengthMeta.error}</Text>}
       <Pressable style={({pressed}) => [{
         backgroundColor: pressed ? 'gray' : 'white',
         }, styles.pressable ]}
@@ -109,6 +121,12 @@ const styles = StyleSheet.create({
   text: {
     color: 'black', 
     fontSize: 24, 
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  errorText: {
+    color: 'red', 
+    fontSize: 14, 
     fontWeight: '700',
     textAlign: 'center',
   },
