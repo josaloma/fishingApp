@@ -5,6 +5,7 @@ const FishDetails = ({route, navigation}) => {
 
     //console.log("FishDetails item:", route.params.item);
     const { item } = route.params;
+
     const onSubmit = async () => {
         console.log("alue painettu takaisin Fishlistiin ");
         navigation.navigate("FishList");

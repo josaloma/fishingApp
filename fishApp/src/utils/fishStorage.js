@@ -7,10 +7,14 @@ class FishStorage {
 
   async getFishList() {
     // Get the access token for the storage
-    const fishList = await AsyncStorage.getItem(
-      `${this.namespace}:fishList`,
-    );
-    return fishList ? JSON.parse(fishList) : [];
+    try {
+      const fishList = await AsyncStorage.getItem(
+        `${this.namespace}:fishList`,
+      );
+      return fishList ? JSON.parse(fishList) : [];
+    } catch(e) {
+      console.log("Error retrieving fishlist from asyncstorage: ", e); 
+    }
   }
 
   async setFishList(fishList) {
