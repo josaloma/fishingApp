@@ -19,28 +19,24 @@ const renderItem = ({item, navigation})=> {
 };
 */
 
-const RenderListHeader = ( {onSubmit} ) => {
+const RenderListHeader = ( {sortBySpecies, sortByPlace, sortByWeight, sortByLength} ) => {
     return (
         <View style={styles.container}>
-            <ScrollView horizontal={true}>
+            {/*<ScrollView horizontal={true}>*/}
                 <Text style={styles.text}>Sort By: </Text>
-                <Pressable style={styles.sortButton} onPress={onSubmit}>
-                {/*<Pressable style={styles.sortButton} onPress={toggleOrder}>*/}
-                    <Text>name</Text>
+                <Pressable style={styles.sortButton} onPress={sortBySpecies}>
+                    <Text>species</Text>
                 </Pressable>
-                <Pressable style={styles.sortButton}>
-                {/*<Pressable style={styles.sortButton} onPress={toggleOrder}>*/}
-                    <Text>length</Text>
-                </Pressable>
-                <Pressable style={styles.sortButton}>
-                {/*<Pressable style={styles.sortButton} onPress={toggleOrder}>*/}
-                    <Text>weight</Text>
-                </Pressable>
-                <Pressable style={styles.sortButton}>
-                {/*<Pressable style={styles.sortButton} onPress={toggleOrder}>*/}
+                <Pressable style={styles.sortButton} onPress={sortByPlace}>
                     <Text>place</Text>
                 </Pressable>
-            </ScrollView>
+                <Pressable style={styles.sortButton} onPress={sortByWeight}>
+                    <Text>weight</Text>
+                </Pressable>
+                <Pressable style={styles.sortButton} onPress={sortByLength}>
+                    <Text>length</Text>
+                </Pressable>
+            {/*</ScrollView>*/}
         </View>
     );
   };
@@ -59,7 +55,7 @@ const FishList = ({navigation}) => {
                 const fishListTemp = await fishStorage.getFishList();
                 setIsLoading(false);
                 setFishList(fishListTemp);
-                console.log("UseEffectissä fishlist", fishList)
+                console.log("UseEffectissä fishlist", fishList);
             } catch (e) {
                 console.log("Virhe listan haussa useEffectissä", e)
             } 
@@ -67,9 +63,26 @@ const FishList = ({navigation}) => {
         fetchData()
     }, [isFocused]);
 
-    const onSubmit = async () => {
-        console.log("nappi painettu flatlist headerissä");
+    const sortBySpecies = async () => {
+        console.log("sortBySpecies nappi painettu flatlist headerissä");
+        const sortedFishList = fishList.sort((a, b) => a.species.localeCompare(b.species));
+        console.log("sortBySpecies sortedFishList", sortedFishList);
+        setFishList(sortedFishList);
+        console.log("sortBySpecies fishlist", fishList);
     }
+
+    const sortByPlace = async () => {
+        console.log("sortByPlace nappi painettu flatlist headerissä");
+    }
+
+    const sortByWeight = async () => {
+        console.log("sortByWeight nappi painettu flatlist headerissä");
+    }
+
+    const sortByLength = async () => {
+        console.log("sortByLength nappi painettu flatlist headerissä");
+    }
+
 
     if (isLoading) {
         console.log("FishList isloading: ", isLoading);
@@ -81,7 +94,7 @@ const FishList = ({navigation}) => {
     return (
         <FlatList
         data={fishList}
-        ListHeaderComponent={(<RenderListHeader onSubmit={onSubmit}/>)} 
+        ListHeaderComponent={(<RenderListHeader sortBySpecies={sortBySpecies} sortByPlace={sortByPlace} sortByWeight={sortByWeight} sortByLength={sortByLength}/>)} 
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <OneFish item={item} navigation={navigation}/>}
         keyExtractor={item => item.id}
