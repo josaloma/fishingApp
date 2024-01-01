@@ -13,7 +13,6 @@ Päivä (dd.mm.yy)    aika (h)        Selitys
 03.12.2023          2h              Formik tuning Yup and reset after send
 31.12.2023          1h              Formik tuning continues
 31.12.2023          1h              Sort field for flatlist
-01.01.2024          1h              Sort field continue
-xx.xx.2023          xh              xx
-xx.xx.2023          xh              xx
-xx.xx.2023          xh              xx
+01.01.2024          2h              Sort field continue
+xx.xx.2024          xh              xx
+xx.xx.2024          xh              xx
