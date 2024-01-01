@@ -1,43 +1,65 @@
 import { FlatList, View, Text, TextInput, Pressable, ScrollView,  StyleSheet } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-//import useFishList from '../hooks/useFishList.js'; // käytössä eneen kun async oli
+//import useFishList from '../hooks/useFishList.js';
+
 
 import OneFish from './OneFish.jsx';
 
 import useFishStorage from '../hooks/useFishStorage';
 
 const ItemSeparator = () => <View style={styles.separator} />;
-
-const RenderListHeader = ( {sortBySpecies, sortByPlace, sortByWeight, sortByLength} ) => {
+/*
+const renderItem = ({item, navigation})=> {
     return (
+        <OneFish fullName={item.fullName} weight={item.weight} length={item.length} navigation={navigation}/>
+    );
+};
+*/
+
+export class RenderFishList extends React.Component {
+    renderHeader = () => {
+    const props = this.props;
+      return (
         <View style={styles.container}>
             {/*<ScrollView horizontal={true}>*/}
                 <Text style={styles.text}>Sort By: </Text>
-                <Pressable style={styles.sortButton} onPress={sortBySpecies}>
+                <Pressable style={styles.sortButton} onPress={props.sortBySpecies}>
                     <Text>species</Text>
                 </Pressable>
-                <Pressable style={styles.sortButton} onPress={sortByPlace}>
+                <Pressable style={styles.sortButton} onPress={props.sortByPlace}>
                     <Text>place</Text>
                 </Pressable>
-                <Pressable style={styles.sortButton} onPress={sortByWeight}>
+                <Pressable style={styles.sortButton} onPress={props.sortByWeight}>
                     <Text>weight</Text>
                 </Pressable>
-                <Pressable style={styles.sortButton} onPress={sortByLength}>
+                <Pressable style={styles.sortButton} onPress={props.sortByLength}>
                     <Text>length</Text>
                 </Pressable>
             {/*</ScrollView>*/}
         </View>
+      );
+  };
+  render() {
+    const props = this.props;
+    return (
+        <FlatList
+            data={props.fishList}
+            ListHeaderComponent={this.renderHeader} 
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={({ item }) => <OneFish item={item} navigation={navigation}/>}
+            keyExtractor={item => item.id}
+        />
     );
   };
+}
 
 const FishList = ({navigation}) => {
     const fishStorage = useFishStorage();
     const [isLoading, setIsLoading] = useState(true);
     const [fishList, setFishList] = useState([]);
-    const [update, setUpdate] = useState(true);
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -61,37 +83,33 @@ const FishList = ({navigation}) => {
         const sortedFishList = fishList.sort((a, b) => a.species.localeCompare(b.species));
         console.log("sortBySpecies sortedFishList", sortedFishList);
         setFishList(sortedFishList);
-        setUpdate(!update);
         console.log("sortBySpecies fishlist", fishList);
-    }
+    };
 
     const sortByPlace = async () => {
         console.log("sortByPlace nappi painettu flatlist headerissä");
-    }
+    };
 
     const sortByWeight = async () => {
         console.log("sortByWeight nappi painettu flatlist headerissä");
-    }
+    };
 
     const sortByLength = async () => {
         console.log("sortByLength nappi painettu flatlist headerissä");
-    }
+    };
 
 
     if (isLoading) {
         console.log("FishList isloading: ", isLoading);
         return <View><Text>Loading...</Text></View>;
     } else {
-        return (
-            <FlatList
-            data={fishList}
-            extraData={update}
-            ListHeaderComponent={<RenderListHeader sortBySpecies={sortBySpecies} sortByPlace={sortByPlace} sortByWeight={sortByWeight} sortByLength={sortByLength}/>} 
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({ item }) => <OneFish item={item} navigation={navigation}/>}
-            keyExtractor={item => item.id}
-            />
-        );
+
+    return (
+        <RenderFishList
+            fishList={fishList} sortByPlace={sortByPlace} sortBySpecies={sortBySpecies} 
+            sortByWeight={sortByWeight} sortByLength={sortByLength}
+        />
+    );
     };
 };
 
@@ -113,17 +131,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         alignItems: 'flex-end',
         marginHorizontal: 10,
-      },
-      container: {
-        //  flexGrow: 1,
-          paddingTop: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingBottom: 0,
-          backgroundColor: '#24292e', //'black',
-          flexDirection: 'row', // column is default row niin peräkkäin
+    },
+    container: {
+    //  flexGrow: 1,
+        paddingTop: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        backgroundColor: '#24292e', //'black',
+        flexDirection: 'row', // column is default row niin peräkkäin
           // ...
-        },
-});
+    },
+    }
+);
 
 export default FishList;
