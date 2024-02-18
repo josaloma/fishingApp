@@ -11,8 +11,8 @@ const OneFish = ({ item, navigation }) => {
         console.log("alue painettu siirtyykö Fishdetailisiin?");
         console.log("oneFish item:", item);
         navigation.navigate("FishDetails",{item: item,});
-        const fishList = await fishStorage.getFishList();
-        console.log(fishList)
+        //const fishList = await fishStorage.getFishList();
+        //console.log(fishList)
     }
  
     return (

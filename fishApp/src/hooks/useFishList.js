@@ -1,3 +1,5 @@
+//tämä ei käytössä oli vaan aluksi jotta saatiin dataa
+
 const fishList = [
     {
       id: 1,

@@ -11,11 +11,14 @@ import useFishStorage from '../hooks/useFishStorage';
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RenderListHeader = ( {sortBySpecies, sortByPlace, sortByWeight, sortByLength} ) => {
+const RenderListHeader = ( {sortByDate, sortBySpecies, sortByPlace, sortByWeight, sortByLength} ) => {
     return (
         <View style={styles.container}>
             {/*<ScrollView horizontal={true}>*/}
                 <Text style={styles.text}>Sort By: </Text>
+                <Pressable style={styles.sortButton} onPress={sortByDate}>
+                    <Text>date</Text>
+                </Pressable>
                 <Pressable style={styles.sortButton} onPress={sortBySpecies}>
                     <Text>species</Text>
                 </Pressable>
@@ -37,6 +40,7 @@ const FishList = ({navigation}) => {
     const fishStorage = useFishStorage();
     const [isLoading, setIsLoading] = useState(true);
     const [fishList, setFishList] = useState([]);
+    const [sortMethod, setSortMethod] = useState("date"); // date , species, place, weight, length
     const [update, setUpdate] = useState(true);
     const isFocused = useIsFocused();
 
@@ -45,24 +49,45 @@ const FishList = ({navigation}) => {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const fishListTemp = await fishStorage.getFishList();
+                const fishListTemp1 = await fishStorage.getFishList(sortMethod);
                 setIsLoading(false);
-                setFishList(fishListTemp);
+                setFishList(fishListTemp1);
                 console.log("UseEffectissä fishlist", fishList);
             } catch (e) {
                 console.log("Virhe listan haussa useEffectissä", e)
             } 
         }
         fetchData()
-    }, [isFocused]);
+    }, [isFocused]); 
+
+    const sortByDate = async () => {
+        console.log("sortByDate nappi painettu flatlist headerissä");
+        setSortMethod("date");
+        setIsLoading(true);
+        try {
+            const fishListTemp2 = await fishStorage.getFishList("date");
+            setIsLoading(false);
+            setFishList(fishListTemp2);
+            console.log("sortByDate fishlist", fishList);
+        } catch (e) {
+            console.log("Virhe listan haussa useEffectissä", e)
+        } 
+        setUpdate(!update);
+    }
 
     const sortBySpecies = async () => {
         console.log("sortBySpecies nappi painettu flatlist headerissä");
-        const sortedFishList = fishList.sort((a, b) => a.species.localeCompare(b.species));
-        console.log("sortBySpecies sortedFishList", sortedFishList);
-        setFishList(sortedFishList);
+        setSortMethod("species");
+        setIsLoading(true);
+        try {
+            const fishListTemp = await fishStorage.getFishList("species");
+            setIsLoading(false);
+            setFishList(fishListTemp);
+            console.log("sortBySpecies fishlist", fishList);
+        } catch (e) {
+            console.log("Virhe listan haussa useEffectissä", e)
+        } 
         setUpdate(!update);
-        console.log("sortBySpecies fishlist", fishList);
     }
 
     const sortByPlace = async () => {
@@ -86,7 +111,7 @@ const FishList = ({navigation}) => {
             <FlatList
             data={fishList}
             extraData={update}
-            ListHeaderComponent={<RenderListHeader sortBySpecies={sortBySpecies} sortByPlace={sortByPlace} sortByWeight={sortByWeight} sortByLength={sortByLength}/>} 
+            ListHeaderComponent={<RenderListHeader sortByDate={sortByDate} sortBySpecies={sortBySpecies} sortByPlace={sortByPlace} sortByWeight={sortByWeight} sortByLength={sortByLength}/>} 
             ItemSeparatorComponent={ItemSeparator}
             renderItem={({ item }) => <OneFish item={item} navigation={navigation}/>}
             keyExtractor={item => item.id}

@@ -83,8 +83,8 @@ const AddFish = ({navigation}) => {
     const kala = {
       id: Date.now(),
       species: values.species,
-      weight: parseFloat(values.weight),
-      length: parseFloat(values.length),
+      weight: values.weight,                //parseFloat(values.weight)
+      length: values.length,    //parseFloat(values.length)
       picture: 'Galleria WOW',
     };
     //const species = values.species
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     backgroundColor: '#e6e6e6'
   },
+
   textInput: {
     height: 40,
     width: '100%',
